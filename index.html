@@ -226,17 +226,6 @@ body.cursor-hover .cursor-dot { opacity:0.4; }
   transform:translateY(-50%) scale(1.7);
   box-shadow:0 0 0 4px color-mix(in srgb, var(--signal) 18%, transparent);
 }
-.rail-foot {
-  position:absolute;
-  bottom:26px; left:0; right:0;
-  text-align:center;
-  font-family:'JetBrains Mono', monospace;
-  font-size:9px; letter-spacing:0.1em;
-  color:var(--ink-faint);
-  writing-mode:vertical-rl;
-  margin:0 auto;
-  height:64px;
-}
 @media (max-width: 1100px){ .rail { display:none; } }
 @media (min-width: 1101px){ body { padding-left:76px; } .rail-adjust { } }
 
@@ -942,7 +931,6 @@ section { position:relative; }
     <a href="#record" data-sec="record"><span class="rail-node"></span>Record</a>
     <a href="#contact" data-sec="contact"><span class="rail-node"></span>Contact</a>
   </div>
-  <div class="rail-foot">GNN · LLM</div>
 </nav>
 
 <main class="shell" id="top">
