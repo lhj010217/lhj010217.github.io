@@ -249,41 +249,21 @@ body.cursor-hover .cursor-dot { opacity:0.4; }
 }
 .wordmark .zh { font-size:15px; color:var(--ink-soft); font-weight:400; }
 @media (min-width:1101px){ .wordmark { display:none; } } /* rail shows brand on desktop */
-/* ---- pill toggles (theme + language) ---- */
-.toggles { display:flex; align-items:center; gap:12px; margin-left:auto; }
-.pill-toggle {
-  position:relative;
-  width:74px; height:30px;
-  border-radius:100px;
-  background:var(--card);
-  border:1px solid var(--rule);
-  cursor:pointer;
-  padding:0;
-  flex:0 0 auto;
-  transition:background 0.4s ease, border-color 0.3s ease;
-}
-.pill-toggle:hover { border-color:var(--signal); }
-.pill-toggle .p-label {
-  position:absolute; inset:0;
-  display:flex; align-items:center;
+.theme-toggle {
   font-family:'JetBrains Mono', monospace;
-  font-size:10px; font-weight:600; letter-spacing:0.14em;
+  font-size:11px; letter-spacing:0.1em;
+  background:var(--paper);
+  border:1px solid var(--rule);
   color:var(--ink-soft);
-  pointer-events:none;
-  transition:color 0.3s ease, justify-content 0s, padding 0.36s cubic-bezier(.6,.05,.25,1);
+  padding:7px 14px;
+  border-radius:100px;
+  cursor:pointer;
+  display:flex; align-items:center; gap:8px;
+  transition:border-color 0.3s, color 0.3s;
+  margin-left:auto;
 }
-.pill-toggle[data-on="left"]  .p-label { justify-content:flex-end;   padding-right:13px; }
-.pill-toggle[data-on="right"] .p-label { justify-content:flex-start; padding-left:13px; }
-.pill-toggle .knob {
-  position:absolute; top:3px; left:3px;
-  width:22px; height:22px; border-radius:50%;
-  background:var(--home-fill); color:var(--home-glyph);
-  display:flex; align-items:center; justify-content:center;
-  box-shadow:0 2px 6px rgba(0,0,0,0.3);
-  transition:transform 0.36s cubic-bezier(.6,.05,.25,1), background 0.4s ease, color 0.4s ease;
-}
-.pill-toggle[data-on="right"] .knob { transform:translateX(46px); }
-.pill-toggle .knob svg { width:12px; height:12px; display:block; }
+.theme-toggle:hover { border-color:var(--signal); color:var(--ink); }
+.theme-toggle .glyph { width:11px; height:11px; }
 
 /* ============ HERO ============ */
 .hero {
@@ -935,16 +915,10 @@ section { position:relative; }
 <!-- ---------- TOP BAR ---------- -->
 <div class="topbar">
   <a href="#top" class="wordmark">이형준<span class="zh">Hyungjoon Lee</span></a>
-  <div class="toggles">
-    <button class="pill-toggle" id="themeBtn" data-on="left" aria-label="테마 전환 (다크 / 라이트)">
-      <span class="p-label" id="themeLabel">DARK</span>
-      <span class="knob" aria-hidden="true"><svg id="themeGlyph" viewBox="0 0 24 24" fill="currentColor"><path d="M20 14.5A8 8 0 0 1 9.5 4 8.5 8.5 0 1 0 20 14.5Z"/></svg></span>
-    </button>
-    <button class="pill-toggle" id="langBtn" data-on="left" data-target="index-en.html" aria-label="Switch to English">
-      <span class="p-label">KR</span>
-      <span class="knob" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18"/></svg></span>
-    </button>
-  </div>
+  <button class="theme-toggle" id="themeBtn" aria-label="테마 전환">
+    <svg class="glyph" id="themeGlyph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M19 5l-1.5 1.5M6.5 17.5L5 19"/></svg>
+    <span id="themeLabel">LIGHT</span>
+  </button>
 </div>
 
 <!-- ---------- INDEX RAIL (sidebar) ---------- -->
@@ -1295,7 +1269,7 @@ section { position:relative; }
                   <span class="what">메타러닝을 이용한 언어 모델의 학습 방법 및 이를 실행하는 시스템
                     <span class="org">Method for Learning Language Model using Meta-Learning and System for Executing the Same</span>
                     <span class="ip-meta">
-                      <span class="ip-line"><span class="ip-k">발명자</span><span class="ip-v">김준태, 서상현, Hiskias Melke Dingeto, 이형준</span></span>
+                      <span class="ip-line"><span class="ip-k">발명자</span><span class="ip-v">김준태, 서상현, Hoskeyas Melkeddin Getto, 이형준</span></span>
                       <span class="ip-line"><span class="ip-k">출원번호</span><span class="ip-v num">10-2025-0166372</span></span>
                     </span>
                   </span>
@@ -1417,24 +1391,14 @@ section { position:relative; }
   var moon = '<path d="M20 14.5A8 8 0 0 1 9.5 4 8.5 8.5 0 1 0 20 14.5Z"/>';
   function apply(t){
     root.setAttribute('data-theme', t);
-    if(t === 'dark'){ label.textContent='DARK'; glyph.setAttribute('fill','currentColor'); glyph.innerHTML=moon; btn.setAttribute('data-on','left'); }
-    else { label.textContent='LIGHT'; glyph.setAttribute('fill','none'); glyph.setAttribute('stroke','currentColor'); glyph.setAttribute('stroke-width','1.9'); glyph.innerHTML=sun; btn.setAttribute('data-on','right'); }
+    if(t === 'dark'){ label.textContent='LIGHT'; glyph.innerHTML=sun; }
+    else { label.textContent='DARK'; glyph.innerHTML=moon; }
     if(window.__setConstellationColor) window.__setConstellationColor();
   }
   var start = 'dark';
   try { if(window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) start = 'light'; } catch(e){}
   apply(start);
   btn.addEventListener('click', function(){ apply(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'); });
-
-  // language toggle : slide the knob, then navigate to the other-language page
-  var lbtn = document.getElementById('langBtn');
-  if(lbtn){
-    lbtn.addEventListener('click', function(){
-      var target = lbtn.getAttribute('data-target');
-      lbtn.setAttribute('data-on', lbtn.getAttribute('data-on') === 'left' ? 'right' : 'left');
-      setTimeout(function(){ window.location.href = target; }, 300);
-    });
-  }
 })();
 
 /* ============ BACKGROUND — GNN message-passing graph ============ */
@@ -1677,7 +1641,7 @@ section { position:relative; }
   }
   requestAnimationFrame(loop);
 
-  var interactive = 'a, button, .record-tab, .chip, .kw, .hf-item, .clink, .pill-toggle, .fn-figure a, .rail-home';
+  var interactive = 'a, button, .record-tab, .chip, .kw, .hf-item, .clink, .theme-toggle, .fn-figure a, .rail-home';
   document.addEventListener('mouseover', function(e){
     if(e.target.closest(interactive)) document.body.classList.add('cursor-hover');
   });
