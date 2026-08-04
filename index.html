@@ -250,10 +250,10 @@ body.cursor-hover .cursor-dot { opacity:0.4; }
 .wordmark .zh { font-size:15px; color:var(--ink-soft); font-weight:400; }
 @media (min-width:1101px){ .wordmark { display:none; } } /* rail shows brand on desktop */
 /* ---- pill toggles (theme + language) ---- */
-.toggles { display:flex; align-items:center; gap:12px; margin-left:auto; }
+.toggles { display:flex; flex-direction:column; align-items:flex-end; gap:10px; margin-left:auto; }
 .pill-toggle {
   position:relative;
-  width:74px; height:30px;
+  width:82px; height:30px;
   border-radius:100px;
   background:var(--card);
   border:1px solid var(--rule);
@@ -264,17 +264,23 @@ body.cursor-hover .cursor-dot { opacity:0.4; }
 }
 .pill-toggle:hover { border-color:var(--signal); }
 .pill-toggle .p-label {
-  position:absolute; inset:0;
-  display:flex; align-items:center;
+  position:absolute; top:0; bottom:0;
+  display:flex; align-items:center; justify-content:center;
   font-family:'JetBrains Mono', monospace;
   font-size:10px; font-weight:600; letter-spacing:0.14em;
   color:var(--ink-soft);
   pointer-events:none;
-  transition:color 0.3s ease, justify-content 0s, padding 0.36s cubic-bezier(.6,.05,.25,1);
+  transition:left 0.36s cubic-bezier(.6,.05,.25,1), right 0.36s cubic-bezier(.6,.05,.25,1), color 0.3s ease;
 }
-.pill-toggle[data-on="left"]  .p-label { justify-content:flex-end;   padding-right:13px; }
-.pill-toggle[data-on="right"] .p-label { justify-content:flex-start; padding-left:13px; }
-.pill-toggle .knob {
+/* label is centered in the pill area NOT occupied by the knob */
+/* dark (테마 노브 왼쪽) */
+#themeBtn[data-on="left"]  .p-label { left:20px; right:0; }
+/* light (테마 노브 오른쪽) */ 
+#themeBtn[data-on="right"] .p-label { left:0; right:13px; }
+/* kr (언어 노브 왼쪽) */ 
+#langBtn[data-on="left"]   .p-label { left:21px; right:0; }
+/* en (언어 노브 오른쪽) */ 
+#langBtn[data-on="right"]  .p-label { left:0; right:14px; }.pill-toggle .knob {
   position:absolute; top:3px; left:3px;
   width:22px; height:22px; border-radius:50%;
   background:var(--home-fill); color:var(--home-glyph);
@@ -282,7 +288,7 @@ body.cursor-hover .cursor-dot { opacity:0.4; }
   box-shadow:0 2px 6px rgba(0,0,0,0.3);
   transition:transform 0.36s cubic-bezier(.6,.05,.25,1), background 0.4s ease, color 0.4s ease;
 }
-.pill-toggle[data-on="right"] .knob { transform:translateX(46px); }
+.pill-toggle[data-on="right"] .knob { transform:translateX(54px); }
 .pill-toggle .knob svg { width:12px; height:12px; display:block; }
 
 
