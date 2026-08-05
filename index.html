@@ -942,7 +942,36 @@ section { position:relative; }
     display: block;
     margin-top:16px;
 }
+.expected-date{
+    color: var(--accent);      /* 포트폴리오 포인트 색 */
+    font-weight: 700;
+    cursor: pointer;
+    position: relative;
+}
 
+/* 툴팁 */
+.expected-date::after{
+    content: attr(data-tip);
+    position: absolute;
+    left: 50%;
+    bottom: calc(100% + 8px);
+    transform: translateX(-50%);
+    background: #222;
+    color: #fff;
+    padding: 5px 8px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .2s, transform .2s;
+    transform-origin: bottom;
+}
+
+.expected-date:hover::after{
+    opacity: 1;
+    transform: translateX(-50%) translateY(-2px);
+}
 </style>
 </head>
 <body>
@@ -1304,8 +1333,30 @@ section { position:relative; }
             <div class="led-grid single">
               <div class="led-col">
                 <h4><span class="lng-ko">학력 · 경력</span><span class="lng-en">Education &amp; Career</span></h4>
-                <div class="ledger-row"><span class="yr"><span class="lng-ko">2025.09 - 현재</span><span class="lng-en">2025.09 - Present</span></span><span class="what"><span class="lng-ko">컴퓨터·AI학 석사과정</span><span class="lng-en">M.S. in Computer Science &amp; AI</span><span class="org"><span class="lng-ko">동국대학교 (지도: 김준태 교수님)</span><span class="lng-en">Dongguk University (Advisor: Prof. Juntae Kim)</span></span></span><span class="rank">GPA 4.33</span></div>
-                <div class="ledger-row"><span class="yr">2020.03 - 2025.08</span><span class="what"><span class="lng-ko">컴퓨터·AI학 공학사</span><span class="lng-en">B.S. in Computer Science &amp; AI</span><span class="org"><span class="lng-ko">동국대학교</span><span class="lng-en">Dongguk University</span></span></span><span class="rank">GPA 4.04</span></div>
+                <div class="ledger-row">
+                  <span class="yr">
+                      <span class="lng-ko">
+                          2025.09 -
+                          <span class="expected-date" data-tip="졸업예정">2027.02</span>
+                      </span>
+                      <span class="lng-en">
+                          2025.09 -
+                          <span class="expected-date" data-tip="Expected Graduation">2027.02</span>
+                      </span>
+                  </span>
+
+                  <span class="what">
+                      <span class="lng-ko">컴퓨터·AI학과 석사과정</span>
+                      <span class="lng-en">M.S. in Computer Science &amp; AI</span>
+                      <span class="org">
+                          <span class="lng-ko">동국대학교 (지도: 김준태 교수님)</span>
+                          <span class="lng-en">Dongguk University (Advisor: Prof. Juntae Kim)</span>
+                      </span>
+                  </span>
+
+                  <span class="rank">GPA 4.33</span>
+              </div>
+                <div class="ledger-row"><span class="yr">2020.03 - 2025.08</span><span class="what"><span class="lng-ko">컴퓨터·AI학과 공학사</span><span class="lng-en">B.S. in Computer Science &amp; AI</span><span class="org"><span class="lng-ko">동국대학교</span><span class="lng-en">Dongguk University</span></span></span><span class="rank">GPA 4.04</span></div>
                 <div class="ledger-row"><span class="yr">2024.09 - 2025.08</span><span class="what"><span class="lng-ko">연구 인턴</span><span class="lng-en">Research Intern</span><span class="org"><span class="lng-ko">동국대학교 인공지능 연구실(AILab)</span><span class="lng-en">Dongguk University AI Lab (AILab)</span></span></span><span class="rank">1yr</span></div>
                 <div class="ledger-row"><span class="yr">2026.03 - 2026.06</span><span class="what"><span class="lng-ko">자료구조 조교</span><span class="lng-en">Data Structures TA</span><span class="org"><span class="lng-ko">동국대학교 컴퓨터공학과</span><span class="lng-en">Dept. of Computer Engineering, Dongguk University</span></span></span><span class="rank">TA</span></div>
                 <div class="ledger-row"><span class="yr">2025.09 - 2025.12</span><span class="what"><span class="lng-ko">인공지능 조교</span><span class="lng-en">Artificial Intelligence TA</span><span class="org"><span class="lng-ko">동국대학교 컴퓨터공학과</span><span class="lng-en">Dept. of Computer Engineering, Dongguk University</span></span></span><span class="rank">TA</span></div>
